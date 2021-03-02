@@ -4,6 +4,7 @@ import telebot
 from telethon.sync import TelegramClient 
 from telethon.tl.types import InputPeerUser, InputPeerChannel 
 from telethon import TelegramClient, sync, events 
+import time
 
 
 parser = argparse.ArgumentParser()
@@ -48,45 +49,15 @@ def telegram_bot_sendtext(bot_message):
 
     return response.json()
     
+while(True):
+    time.sleep(3)
+    test = telegram_bot_sendtext(venue)
+    test = telegram_bot_sendtext(status)
+    test = telegram_bot_sendtext(summary)
 
-test = telegram_bot_sendtext(venue)
-print(test)
 
 
-"""api_id = '3664885'
-api_hash = '597eb2483c1e172e8e52d40461444f40'
-token = '1546857499:AAG_aFZeRhR-bLibgdTwCgLzQDZ9NriQoVI'
-
-phone = '+919886882121'
-
-client = TelegramClient('session', api_id, api_hash)
-
-client.connect() 
-
-if not client.is_user_authorized(): 
-   
-    client.send_code_request(phone) 
-      
-    # signing in the client 
-    client.sign_in(phone, input('Enter the code: ')) 
-
-try: 
-    # receiver user_id and access_hash, use 
-    # my user_id and access_hash for reference 
-    receiver = InputPeerUser('user_id', 'user_hash') 
-  
-    # sending message using telegram client 
-    client.send_message(receiver, message = venue, parse_mode='html') 
-except Exception as e: 
-      
-    # there may be many error coming in while like peer 
-    # error, wwrong access_hash, flood_error, etc 
-    print(e)
-  
-# disconnecting the telegram session  
-client.disconnect() 
-"""
-
+#print(test)
 
 
 """print(venue)
