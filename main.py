@@ -71,7 +71,7 @@ while(True):
     test = telegram_bot_sendtext(summary)
     time.sleep(1)
     #message = getScores(scores)
-    test = telegram_bot_sendtext("homeScore: 145 and 0-49 homeOvers: 53.2 and 7.4 awayScore: 112 and 81 awayOvers: 48.4 and 30.4")
+    test = telegram_bot_sendtext("homeScore: 145 and 0-49\nhomeOvers: 53.2 and 7.4\nawayScore: 112 and 81\nawayOvers: 48.4 and 30.4")
     time.sleep(5)
 
 
