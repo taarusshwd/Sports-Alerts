@@ -5,6 +5,7 @@ from telethon.sync import TelegramClient
 from telethon.tl.types import InputPeerUser, InputPeerChannel 
 from telethon import TelegramClient, sync, events 
 import time
+import urllib.parse
 
 
 parser = argparse.ArgumentParser()
@@ -16,6 +17,9 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
+
+def validMessage(message):
+    return urllib.parse.quote_plus(message)
 
 def generate_message_data():
     url = "https://dev132-cricket-live-scores-v1.p.rapidapi.com/matchseries.php"
@@ -53,7 +57,7 @@ def telegram_bot_sendtext(bot_message):
     
     bot_token = '1546857499:AAG_aFZeRhR-bLibgdTwCgLzQDZ9NriQoVI'
     bot_chatID = '1081769492'
-    send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + bot_message
+    send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=HTML&text=' + bot_message
 
     response = requests.get(send_text)
 
@@ -70,16 +74,16 @@ while(True):
     time.sleep(1)
     test = telegram_bot_sendtext(summary)
     time.sleep(1)
-    #message = getScores(scores)
-    test = telegram_bot_sendtext("homeScore: 145 and 0-49\nhomeOvers: 53.2 and 7.4\nawayScore: 112 and 81\nawayOvers: 48.4 and 30.4")
+    message = getScores(scores)
+    test = telegram_bot_sendtext(validMessage(message))
     time.sleep(5)
 
 
 
 
 #print(test)
-
-
+#"homeScore: 145 and 0-49\nhomeOvers: 53.2 and 7.4\nawayScore: 112 and 81\nawayOvers: 48.4 and 30.4"
+#homeScore%3A+145+%26+0-49%0AhomeOvers%3A+53.2+%26+7.4%0AawayScore%3A+112+%26+81%0AawayOvers%3A+48.4+%26+30.4
 """venue, status, summary, scores = generate_message_data()
 print(venue)
 print(status)
