@@ -1,11 +1,6 @@
-import requests, argparse
-import json
-import telebot
-from telethon.sync import TelegramClient 
-from telethon.tl.types import InputPeerUser, InputPeerChannel 
-from telethon import TelegramClient, sync, events 
+import argparse 
 import time
-import urllib.parse
+from helper import validMessage, sendMessage, getScores, generateMessageData
 
 
 parser = argparse.ArgumentParser()
@@ -17,86 +12,22 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-
-def validMessage(message):
-    return urllib.parse.quote_plus(message)
-
-def generate_message_data():
-    url = "https://dev132-cricket-live-scores-v1.p.rapidapi.com/matchseries.php"
-    id = args.id
-    querystring = {"seriesid": id}
-    headers = {
-        'x-rapidapi-key': "3f002d2a37mshbd5ff13d303a772p114fe9jsn3c632d48eeef",
-        'x-rapidapi-host': "dev132-cricket-live-scores-v1.p.rapidapi.com"
-        }
-
-    response = requests.request("GET", url, headers=headers, params=querystring)
-
-    data = json.loads(response.text)
-
-    for match in data['matchList']['matches']:
-        if match['id'] == 49840:
-            venue = match['venue']['name']
-            status = match['status']
-            summary = match['currentMatchState']
-            score = match['scores']
-            break
-
-    return venue, status, summary, score
-
-
-def getScores(scores):
-    message = ""
-    for score in scores:
-        message = message + score + ": " + scores[score] + '\n'
-    
-    return message
-
-
-def telegram_bot_sendtext(bot_message):
-    
-    bot_token = '1546857499:AAG_aFZeRhR-bLibgdTwCgLzQDZ9NriQoVI'
-    bot_chatID = '1081769492'
-    send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=HTML&text=' + bot_message
-
-    response = requests.get(send_text)
-
-    return response.json()
-
-
-
 while(True):
     time.sleep(5)
-    venue, status, summary, scores = generate_message_data()
-    test = telegram_bot_sendtext(venue)
+    venue, status, summary, scores = generateMessageData(args)
+    test = sendMessage(venue)
     time.sleep(1)
-    test = telegram_bot_sendtext(status)
+    test = sendMessage(status)
     time.sleep(1)
-    test = telegram_bot_sendtext(summary)
+    test = sendMessage(summary)
     time.sleep(1)
     message = getScores(scores)
-    test = telegram_bot_sendtext(validMessage(message))
-    time.sleep(5)
+    test = sendMessage(validMessage(message))
 
 
+#test_id = 49839, 2730
 
-
-#print(test)
-#"homeScore: 145 and 0-49\nhomeOvers: 53.2 and 7.4\nawayScore: 112 and 81\nawayOvers: 48.4 and 30.4"
-#homeScore%3A+145+%26+0-49%0AhomeOvers%3A+53.2+%26+7.4%0AawayScore%3A+112+%26+81%0AawayOvers%3A+48.4+%26+30.4
-"""venue, status, summary, scores = generate_message_data()
-print(venue)
-print(status)
-print(summary)
-print(getScores(scores))
-for i in scores:
-    print(i + ": " + scores[i])
-"""      
-#print(response.text)
-
-#id = 49839, 2730
-
-#1 Print scores
-#2 Isolate the functions; this main.py should call other functions
-#3 make another function to send the notifs: shouldn't be happening in while loop
+#1 Print scores^
+#2 Isolate the functions; this main.py should call other functions^
+#3 make another function to send the notifs: shouldn't be happening in while loop*
 #4 more functionalities
