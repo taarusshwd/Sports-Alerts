@@ -1,0 +1,35 @@
+import argparse 
+import time
+from helper import trialMatch3rdT20, sendMessage
+
+
+'''parser = argparse.ArgumentParser()
+parser.add_argument(
+    '--id',
+    '-id',
+    default = 2730,
+    help = 'enter the series id/match id'
+)
+
+args = parser.parse_args()'''
+
+while(True):
+    time.sleep(5)
+    summary = trialMatch3rdT20()
+    test = sendMessage(summary)
+    time.sleep(1)
+    '''test = sendMessage(status)
+    time.sleep(1)
+    test = sendMessage(summary)
+    time.sleep(1)
+    message = getScores(scores)
+    test = sendMessage(validMessage(message))'''
+
+
+#test_id = 49839, 2730
+#test_id_3rd_T20 = 49844, 2731
+
+#1 Print scores^
+#2 Isolate the functions; this main.py should call other functions^
+#3 make another function to send the notifs: shouldn't be happening in while loop*
+#4 more functionalities
