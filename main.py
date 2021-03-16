@@ -26,6 +26,7 @@ while(True):
 
 
 #test_id = 49839, 2730
+#test_id_3rd_T20 = 49844, 2731
 
 #1 Print scores^
 #2 Isolate the functions; this main.py should call other functions^
