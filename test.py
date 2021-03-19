@@ -3,7 +3,7 @@ import json
 
 url = "https://dev132-cricket-live-scores-v1.p.rapidapi.com/scorecards.php"
 
-querystring = {"seriesid":"2141","matchid":"43431"}
+querystring = {"seriesid":"2731","matchid":"49845"}
 
 headers = {
     'x-rapidapi-key': "3f002d2a37mshbd5ff13d303a772p114fe9jsn3c632d48eeef",
@@ -21,4 +21,5 @@ manOfTheMatch = data["fullScorecardAwards"]["manOfTheMatchName"]
 
 print(batsmen["name"])
 print(bowler["name"])
+print(manOfTheMatch)
 print(manOfTheMatch)
